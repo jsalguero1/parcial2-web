@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "f5a7eb6a-8dbb-448b-8cf2-922a89d5f37c",
+		"_postman_id": "d96d50fe-8b6f-4c9a-be83-443dd5950975",
 		"name": "Club-Socio Association Collection",
 		"description": "Collection of requests for the association between Club and Socio",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -149,6 +149,20 @@
 		},
 		{
 			"name": "Get one socio from a club",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -166,11 +180,11 @@
 					"variable": [
 						{
 							"key": "clubId",
-							"value": "1"
+							"value": "c2f48f17-2de9-4122-8c53-2ea541b17db1"
 						},
 						{
 							"key": "socioId",
-							"value": "1"
+							"value": "d7792b9b-2f05-47d8-b3a2-41997ff32b09"
 						}
 					]
 				}
@@ -179,6 +193,25 @@
 		},
 		{
 			"name": "Get non-member socio from a club",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"Socio not found\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -196,11 +229,11 @@
 					"variable": [
 						{
 							"key": "clubId",
-							"value": "1"
+							"value": "c2f48f17-2de9-4122-8c53-2ea541b17db1"
 						},
 						{
 							"key": "socioId",
-							"value": "0"
+							"value": "d7792b9b-2f05-47d8-b3a2-41997ff32b07"
 						}
 					]
 				}
@@ -236,7 +269,7 @@
 					"raw": "[{\n    \"nombre\": \"Updated Socio\",\n    \"email\": \"updated.socio@example.com\",\n    \"birthday\": \"1990-01-01T00:00:00.000Z\"\n}]"
 				},
 				"url": {
-					"raw": "{{baseUrl}}/clubs/:clubId/members?=[de9ded39-7c8e-4264-8b2c-48f576fdad33, 9e6fadd8-6f76-4eb5-9f5a-4de98fa409e4]",
+					"raw": "{{baseUrl}}/clubs/:clubId/members",
 					"host": [
 						"{{baseUrl}}"
 					],
@@ -247,8 +280,9 @@
 					],
 					"query": [
 						{
-							"key": null,
-							"value": "[de9ded39-7c8e-4264-8b2c-48f576fdad33, 9e6fadd8-6f76-4eb5-9f5a-4de98fa409e4]"
+							"key": "",
+							"value": "[de9ded39-7c8e-4264-8b2c-48f576fdad33, 9e6fadd8-6f76-4eb5-9f5a-4de98fa409e4]",
+							"disabled": true
 						}
 					],
 					"variable": [
@@ -274,7 +308,7 @@
 							"",
 							"pm.test(\"Get expected error message\", function () {",
 							"   var data = pm.response.json();",
-							"   pm.expect(data.message).to.eql(\"The museum with the given id was not found\");",
+							"   pm.expect(data.message).to.eql(\"Socio not found\");",
 							"});"
 						],
 						"type": "text/javascript",
@@ -292,7 +326,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "[{\n    \"nombre\": \"Non-existent Socio\",\n    \"email\": \"non.existent.socio@example.com\",\n    \"birthday\": \"\"\n}]"
+					"raw": "[    {\n        \"id\": \"0dc57fa1-de0c-4bd1-8e64-8a57cdf8b885\",\n        \"nombre\": \"Valid Socio\",\n        \"email\": \"valid.socio@example.com\",\n        \"birthday\": \"1990-01-01T00:00:00.000Z\",\n        \"clubs\": []\n    }]"
 				},
 				"url": {
 					"raw": "{{baseUrl}}/clubs/:clubId/members",

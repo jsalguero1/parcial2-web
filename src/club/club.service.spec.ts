@@ -1,18 +1,27 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { getRepositoryToken } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-config';
 import { ClubService } from './club.service';
+import { ClubEntity } from './club.entity/club.entity';
 
-describe('ClubService', () => {
-  let service: ClubService;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [ClubService],
-    }).compile();
+describe('CLubService', () => {
+ let service: ClubService;
+ let repository: Repository<ClubEntity>;
 
-    service = module.get<ClubService>(ClubService);
-  });
+ beforeEach(async () => {
+   const module: TestingModule = await Test.createTestingModule({
+     imports: [...TypeOrmTestingConfig()],
+     providers: [ClubService],
+   }).compile();
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
+   service = module.get<ClubService>(ClubService);
+   repository = module.get<Repository<ClubEntity>>(getRepositoryToken(ClubEntity));
+ });
+  
+ it('should be defined', () => {
+   expect(service).toBeDefined();
+ });
+
 });

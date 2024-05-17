@@ -14,13 +14,13 @@ import { ClubSocioModule } from './club-socio/club-socio.module';
     host: 'localhost',
     port: 5432,
     username: 'postgres',
-    password: 'postgres',
+    password: '',
     database: 'postgres',
     entities: [SocioEntity, ClubEntity],
     dropSchema: true,
     synchronize: true,
     keepConnectionAlive: true
-  }), ClubSocioModule],
+  }), ClubSocioModule,],
   controllers: [AppController],
   providers: [AppService],
 })

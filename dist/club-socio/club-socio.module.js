@@ -6,21 +6,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ClubModule = void 0;
+exports.ClubSocioModule = void 0;
 const common_1 = require("@nestjs/common");
-const club_service_1 = require("./club.service");
+const club_socio_service_1 = require("./club-socio.service");
+const club_socio_controller_1 = require("./club-socio.controller");
 const typeorm_1 = require("@nestjs/typeorm");
-const club_entity_1 = require("./club.entity/club.entity");
-const club_controller_1 = require("./club.controller");
-let ClubModule = class ClubModule {
+const club_entity_1 = require("../club/club.entity/club.entity");
+const socio_entity_1 = require("../socio/socio.entity/socio.entity");
+let ClubSocioModule = class ClubSocioModule {
 };
-exports.ClubModule = ClubModule;
-exports.ClubModule = ClubModule = __decorate([
+exports.ClubSocioModule = ClubSocioModule;
+exports.ClubSocioModule = ClubSocioModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([club_entity_1.ClubEntity])],
-        providers: [club_service_1.ClubService],
-        controllers: [club_controller_1.ClubController],
-        exports: [typeorm_1.TypeOrmModule],
+        imports: [typeorm_1.TypeOrmModule.forFeature([club_entity_1.ClubEntity, socio_entity_1.SocioEntity])],
+        providers: [club_socio_service_1.ClubSocioService],
+        controllers: [club_socio_controller_1.ClubSocioController]
     })
-], ClubModule);
-//# sourceMappingURL=club.module.js.map
+], ClubSocioModule);
+//# sourceMappingURL=club-socio.module.js.map

@@ -1,0 +1,411 @@
+{
+	"info": {
+		"_postman_id": "80763b48-a245-4e74-8641-7a111f6b39de",
+		"name": "Socio Collection",
+		"description": "Collection of requests for the Socio entity",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26188169"
+	},
+	"item": [
+		{
+			"name": "Create a valid socio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var data = pm.response.json();",
+							"pm.globals.set(\"socio_id\", data.id);",
+							"",
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Valid Socio\",\n    \"email\": \"valid.socio@example.com\",\n    \"birthday\": \"1990-01-01T00:00:00.000Z\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/members",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"members"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create an invalid socio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 400\", function () {",
+							"    pm.response.to.have.status(400);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.be.an(\"array\").that.includes.members([",
+							"        \"nombre should not be empty\",",
+							"        \"email should not be empty\",",
+							"        \"birthday should not be empty\"",
+							"    ]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"\",\n    \"email\": \"\",\n    \"birthday\": \"\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/members",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"members"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all socios",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test('Number of clubs > 0', function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.length).to.be.greaterThan(0);",
+							"});",
+							"",
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/members",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"members"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get socio by ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/members/:socioId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"members",
+						":socioId"
+					],
+					"variable": [
+						{
+							"key": "socioId",
+							"value": "3649fa0e-fc6f-40fe-884f-65647e23c201"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get socio by non-existent ID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"Socio with the given id not found\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/members/:socioId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"members",
+						":socioId"
+					],
+					"variable": [
+						{
+							"key": "socioId",
+							"value": "3649fa0e-fc6f-40fe-884f-65647e23c202"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a socio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Updated Socio\",\n    \"email\": \"updated.socio@example.com\",\n    \"birthday\": \"1990-01-01T00:00:00.000Z\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/members/:socioId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"members",
+						":socioId"
+					],
+					"variable": [
+						{
+							"key": "socioId",
+							"value": "3649fa0e-fc6f-40fe-884f-65647e23c201"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update a non-existent socio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"socio with the given id not found\");",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"Non-existent Socio\",\n    \"email\": \"non.existent.socio@example.com\",\n    \"birthday\": \"1990-01-01T00:00:00.000Z\"\n}"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/members/:socioId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"members",
+						":socioId"
+					],
+					"variable": [
+						{
+							"key": "socioId",
+							"value": "3649fa0e-fc6f-40fe-884f-65647e23c202"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a socio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"    pm.response.to.have.status(204);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/members/:socioId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"members",
+						":socioId"
+					],
+					"variable": [
+						{
+							"key": "socioId",
+							"value": "3649fa0e-fc6f-40fe-884f-65647e23c201"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete a non-existent socio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"    pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.message).to.eql(\"socio with the given id not found\");",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/members/:socioId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"members",
+						":socioId"
+					],
+					"variable": [
+						{
+							"key": "socioId",
+							"value": "3649fa0e-fc6f-40fe-884f-65647e23c202"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/api/v1"
+		}
+	]
+}

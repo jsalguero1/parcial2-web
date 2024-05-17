@@ -1,0 +1,364 @@
+{
+	"info": {
+		"_postman_id": "f5a7eb6a-8dbb-448b-8cf2-922a89d5f37c",
+		"name": "Club-Socio Association Collection",
+		"description": "Collection of requests for the association between Club and Socio",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26188169"
+	},
+	"item": [
+		{
+			"name": "Add a socio to a club",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"    pm.response.to.have.status(201);",
+							"});",
+							"",
+							"pm.test(\"Get expected response\", function () {",
+							"    var data = pm.response.json();",
+							"    pm.expect(data.socios.length).to.be.greaterThan(0);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/clubs/:clubId/members/:socioId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"clubs",
+						":clubId",
+						"members",
+						":socioId"
+					],
+					"variable": [
+						{
+							"key": "clubId",
+							"value": "c2f48f17-2de9-4122-8c53-2ea541b17db1",
+							"description": "Cambiar por ID valido"
+						},
+						{
+							"key": "socioId",
+							"value": "d7792b9b-2f05-47d8-b3a2-41997ff32b09",
+							"description": "Cambiar por ID valido"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Associate a non-existent socio to a club",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"Socio not found\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/clubs/:clubId/members/:socioId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"clubs",
+						":clubId",
+						"members",
+						":socioId"
+					],
+					"variable": [
+						{
+							"key": "clubId",
+							"value": "c2f48f17-2de9-4122-8c53-2ea541b17db1"
+						},
+						{
+							"key": "socioId",
+							"value": "d7792b9b-2f05-47d8-b3a2-41997ff32b0a"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all socios from a club",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/clubs/:clubId/members",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"clubs",
+						":clubId",
+						"members"
+					],
+					"variable": [
+						{
+							"key": "clubId",
+							"value": "c2f48f17-2de9-4122-8c53-2ea541b17db1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get one socio from a club",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/clubs/:clubId/members/:socioId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"clubs",
+						":clubId",
+						"members",
+						":socioId"
+					],
+					"variable": [
+						{
+							"key": "clubId",
+							"value": "1"
+						},
+						{
+							"key": "socioId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get non-member socio from a club",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/clubs/:clubId/members/:socioId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"clubs",
+						":clubId",
+						"members",
+						":socioId"
+					],
+					"variable": [
+						{
+							"key": "clubId",
+							"value": "1"
+						},
+						{
+							"key": "socioId",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update members of a club",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n    \"nombre\": \"Updated Socio\",\n    \"email\": \"updated.socio@example.com\",\n    \"birthday\": \"1990-01-01T00:00:00.000Z\"\n}]"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/clubs/:clubId/members",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"clubs",
+						":clubId",
+						"members"
+					],
+					"variable": [
+						{
+							"key": "clubId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update members of a club with non-existent socio",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 404\", function () {",
+							"   pm.response.to.have.status(404);",
+							"});",
+							"",
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"The museum with the given id was not found\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[{\n    \"nombre\": \"Non-existent Socio\",\n    \"email\": \"non.existent.socio@example.com\",\n    \"birthday\": \"\"\n}]"
+				},
+				"url": {
+					"raw": "{{baseUrl}}/clubs/:clubId/members",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"clubs",
+						":clubId",
+						"members"
+					],
+					"variable": [
+						{
+							"key": "clubId",
+							"value": "c2f48f17-2de9-4122-8c53-2ea541b17db1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove a socio from a club",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/clubs/:clubId/members/:socioId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"clubs",
+						":clubId",
+						"members",
+						":socioId"
+					],
+					"variable": [
+						{
+							"key": "clubId",
+							"value": "1"
+						},
+						{
+							"key": "socioId",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Remove non-member socio from a club",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/clubs/:clubId/members/:socioId",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"clubs",
+						":clubId",
+						"members",
+						":socioId"
+					],
+					"variable": [
+						{
+							"key": "clubId",
+							"value": "1"
+						},
+						{
+							"key": "socioId",
+							"value": "0"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:3000/api/v1"
+		}
+	]
+}

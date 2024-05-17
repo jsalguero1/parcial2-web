@@ -15,6 +15,7 @@ const club_module_1 = require("./club/club.module");
 const typeorm_1 = require("@nestjs/typeorm");
 const socio_entity_1 = require("./socio/socio.entity/socio.entity");
 const club_entity_1 = require("./club/club.entity/club.entity");
+const club_socio_module_1 = require("./club-socio/club-socio.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -25,13 +26,13 @@ exports.AppModule = AppModule = __decorate([
                 host: 'localhost',
                 port: 5432,
                 username: 'postgres',
-                password: 'postgres',
+                password: '',
                 database: 'postgres',
                 entities: [socio_entity_1.SocioEntity, club_entity_1.ClubEntity],
                 dropSchema: true,
                 synchronize: true,
                 keepConnectionAlive: true
-            })],
+            }), club_socio_module_1.ClubSocioModule,],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
     })

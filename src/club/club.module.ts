@@ -7,6 +7,7 @@ import { ClubController } from './club.controller';
 @Module({
   imports:[TypeOrmModule.forFeature([ClubEntity])],
   providers: [ClubService],
-  controllers: [ClubController]
+  controllers: [ClubController],
+  exports: [TypeOrmModule],
 })
 export class ClubModule {}

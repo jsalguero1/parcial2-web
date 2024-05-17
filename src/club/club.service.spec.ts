@@ -5,7 +5,6 @@ import { TypeOrmTestingConfig } from '../shared/testing-utils/typeorm-testing-co
 import { ClubService } from './club.service';
 import { ClubEntity } from './club.entity/club.entity';
 import { faker } from '@faker-js/faker';
-import { BusinessLogicException } from '../shared/errors/business-errors';
 
 describe('ClubService', () => {
   let service: ClubService;

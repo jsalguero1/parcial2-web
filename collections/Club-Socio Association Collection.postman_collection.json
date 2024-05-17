@@ -209,6 +209,20 @@
 		},
 		{
 			"name": "Update members of a club",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 201\", function () {",
+							"   pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "PUT",
 				"header": [
@@ -222,7 +236,7 @@
 					"raw": "[{\n    \"nombre\": \"Updated Socio\",\n    \"email\": \"updated.socio@example.com\",\n    \"birthday\": \"1990-01-01T00:00:00.000Z\"\n}]"
 				},
 				"url": {
-					"raw": "{{baseUrl}}/clubs/:clubId/members",
+					"raw": "{{baseUrl}}/clubs/:clubId/members?=[de9ded39-7c8e-4264-8b2c-48f576fdad33, 9e6fadd8-6f76-4eb5-9f5a-4de98fa409e4]",
 					"host": [
 						"{{baseUrl}}"
 					],
@@ -231,10 +245,16 @@
 						":clubId",
 						"members"
 					],
+					"query": [
+						{
+							"key": null,
+							"value": "[de9ded39-7c8e-4264-8b2c-48f576fdad33, 9e6fadd8-6f76-4eb5-9f5a-4de98fa409e4]"
+						}
+					],
 					"variable": [
 						{
 							"key": "clubId",
-							"value": "1"
+							"value": "c2f48f17-2de9-4122-8c53-2ea541b17db1"
 						}
 					]
 				}
@@ -296,6 +316,20 @@
 		},
 		{
 			"name": "Remove a socio from a club",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Status code is 204\", function () {",
+							"   pm.response.to.have.status(204);",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -313,11 +347,11 @@
 					"variable": [
 						{
 							"key": "clubId",
-							"value": "1"
+							"value": "c2f48f17-2de9-4122-8c53-2ea541b17db1"
 						},
 						{
 							"key": "socioId",
-							"value": "1"
+							"value": "d7792b9b-2f05-47d8-b3a2-41997ff32b09"
 						}
 					]
 				}
@@ -326,6 +360,21 @@
 		},
 		{
 			"name": "Remove non-member socio from a club",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Get expected error message\", function () {",
+							"   var data = pm.response.json();",
+							"   pm.expect(data.message).to.eql(\"Socio not found\");",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -343,11 +392,11 @@
 					"variable": [
 						{
 							"key": "clubId",
-							"value": "1"
+							"value": "c2f48f17-2de9-4122-8c53-2ea541b17db1"
 						},
 						{
 							"key": "socioId",
-							"value": "0"
+							"value": "d7792b9b-2f05-47d8-b3a2-41997ff32b09"
 						}
 					]
 				}

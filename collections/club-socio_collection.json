@@ -1,0 +1,221 @@
+{
+    "info": {
+      "name": "Club-Socio Association Collection",
+      "description": "Collection of requests for the association between Club and Socio",
+      "_postman_id": "c7e7d9a3-0c8c-4fbf-8d23-7e42c8a9d7e9",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Add a socio to a club",
+        "request": {
+          "method": "POST",
+          "header": [],
+          "url": {
+            "raw": "{{baseUrl}}/clubs/:clubId/members/:socioId",
+            "host": ["{{baseUrl}}"],
+            "path": ["clubs", ":clubId", "members", ":socioId"],
+            "variable": [
+              {
+                "key": "clubId",
+                "value": "1"
+              },
+              {
+                "key": "socioId",
+                "value": "1"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Associate a non-existent socio to a club",
+        "request": {
+          "method": "POST",
+          "header": [],
+          "url": {
+            "raw": "{{baseUrl}}/clubs/:clubId/members/:socioId",
+            "host": ["{{baseUrl}}"],
+            "path": ["clubs", ":clubId", "members", ":socioId"],
+            "variable": [
+              {
+                "key": "clubId",
+                "value": "1"
+              },
+              {
+                "key": "socioId",
+                "value": "0"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Get all socios from a club",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "{{baseUrl}}/clubs/:clubId/members",
+            "host": ["{{baseUrl}}"],
+            "path": ["clubs", ":clubId", "members"],
+            "variable": [
+              {
+                "key": "clubId",
+                "value": "1"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Get one socio from a club",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "{{baseUrl}}/clubs/:clubId/members/:socioId",
+            "host": ["{{baseUrl}}"],
+            "path": ["clubs", ":clubId", "members", ":socioId"],
+            "variable": [
+              {
+                "key": "clubId",
+                "value": "1"
+              },
+              {
+                "key": "socioId",
+                "value": "1"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Get non-member socio from a club",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "{{baseUrl}}/clubs/:clubId/members/:socioId",
+            "host": ["{{baseUrl}}"],
+            "path": ["clubs", ":clubId", "members", ":socioId"],
+            "variable": [
+              {
+                "key": "clubId",
+                "value": "1"
+              },
+              {
+                "key": "socioId",
+                "value": "0"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Update members of a club",
+        "request": {
+          "method": "PUT",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "[{\n    \"nombre\": \"Updated Socio\",\n    \"email\": \"updated.socio@example.com\",\n    \"birthday\": \"1990-01-01T00:00:00.000Z\"\n}]"
+          },
+          "url": {
+            "raw": "{{baseUrl}}/clubs/:clubId/members",
+            "host": ["{{baseUrl}}"],
+            "path": ["clubs", ":clubId", "members"],
+            "variable": [
+              {
+                "key": "clubId",
+                "value": "1"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Update members of a club with non-existent socio",
+        "request": {
+          "method": "PUT",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "[{\n    \"nombre\": \"Non-existent Socio\",\n    \"email\": \"non.existent.socio@example.com\",\n    \"birthday\": \"1990-01-01T00:00:00.000Z\"\n}]"
+          },
+          "url": {
+            "raw": "{{baseUrl}}/clubs/:clubId/members",
+            "host": ["{{baseUrl}}"],
+            "path": ["clubs", ":clubId", "members"],
+            "variable": [
+              {
+                "key": "clubId",
+                "value": "1"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Remove a socio from a club",
+        "request": {
+          "method": "DELETE",
+          "header": [],
+          "url": {
+            "raw": "{{baseUrl}}/clubs/:clubId/members/:socioId",
+            "host": ["{{baseUrl}}"],
+            "path": ["clubs", ":clubId", "members", ":socioId"],
+            "variable": [
+              {
+                "key": "clubId",
+                "value": "1"
+              },
+              {
+                "key": "socioId",
+                "value": "1"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Remove non-member socio from a club",
+        "request": {
+          "method": "DELETE",
+          "header": [],
+          "url": {
+            "raw": "{{baseUrl}}/clubs/:clubId/members/:socioId",
+            "host": ["{{baseUrl}}"],
+            "path": ["clubs", ":clubId", "members", ":socioId"],
+            "variable": [
+              {
+                "key": "clubId",
+                "value": "1"
+              },
+              {
+                "key": "socioId",
+                "value": "0"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "variable": [
+      {
+        "key": "baseUrl",
+        "value": "http://localhost:3000"
+      }
+    ]
+  }
+  

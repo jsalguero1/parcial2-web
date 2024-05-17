@@ -1,0 +1,197 @@
+{
+    "info": {
+      "name": "Club Collection",
+      "description": "Collection of requests for the Club entity",
+      "_postman_id": "a5e7d7a1-8c6a-4d9f-8e12-5d30c6a7b5e7",
+      "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+      {
+        "name": "Create a valid club",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n    \"nombre\": \"Valid Club\",\n    \"foundationDate\": \"2023-01-01T00:00:00.000Z\",\n    \"image\": \"http://example.com/image.jpg\",\n    \"description\": \"This is a valid club.\"\n}"
+          },
+          "url": {
+            "raw": "{{baseUrl}}/clubs",
+            "host": ["{{baseUrl}}"],
+            "path": ["clubs"]
+          }
+        }
+      },
+      {
+        "name": "Create an invalid club",
+        "request": {
+          "method": "POST",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n    \"nombre\": \"\",\n    \"foundationDate\": \"\",\n    \"image\": \"\",\n    \"description\": \"\"\n}"
+          },
+          "url": {
+            "raw": "{{baseUrl}}/clubs",
+            "host": ["{{baseUrl}}"],
+            "path": ["clubs"]
+          }
+        }
+      },
+      {
+        "name": "Get all clubs",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "{{baseUrl}}/clubs",
+            "host": ["{{baseUrl}}"],
+            "path": ["clubs"]
+          }
+        }
+      },
+      {
+        "name": "Get club by ID",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "{{baseUrl}}/clubs/:clubId",
+            "host": ["{{baseUrl}}"],
+            "path": ["clubs", ":clubId"],
+            "variable": [
+              {
+                "key": "clubId",
+                "value": "1"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Get club by non-existent ID",
+        "request": {
+          "method": "GET",
+          "header": [],
+          "url": {
+            "raw": "{{baseUrl}}/clubs/:clubId",
+            "host": ["{{baseUrl}}"],
+            "path": ["clubs", ":clubId"],
+            "variable": [
+              {
+                "key": "clubId",
+                "value": "0"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Update a club",
+        "request": {
+          "method": "PUT",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n    \"nombre\": \"Updated Club\",\n    \"foundationDate\": \"2023-01-01T00:00:00.000Z\",\n    \"image\": \"http://example.com/image-updated.jpg\",\n    \"description\": \"This is an updated club.\"\n}"
+          },
+          "url": {
+            "raw": "{{baseUrl}}/clubs/:clubId",
+            "host": ["{{baseUrl}}"],
+            "path": ["clubs", ":clubId"],
+            "variable": [
+              {
+                "key": "clubId",
+                "value": "1"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Update a non-existent club",
+        "request": {
+          "method": "PUT",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": {
+            "mode": "raw",
+            "raw": "{\n    \"nombre\": \"Non-existent Club\",\n    \"foundationDate\": \"2023-01-01T00:00:00.000Z\",\n    \"image\": \"http://example.com/image-updated.jpg\",\n    \"description\": \"This club does not exist.\"\n}"
+          },
+          "url": {
+            "raw": "{{baseUrl}}/clubs/:clubId",
+            "host": ["{{baseUrl}}"],
+            "path": ["clubs", ":clubId"],
+            "variable": [
+              {
+                "key": "clubId",
+                "value": "0"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Delete a club",
+        "request": {
+          "method": "DELETE",
+          "header": [],
+          "url": {
+            "raw": "{{baseUrl}}/clubs/:clubId",
+            "host": ["{{baseUrl}}"],
+            "path": ["clubs", ":clubId"],
+            "variable": [
+              {
+                "key": "clubId",
+                "value": "1"
+              }
+            ]
+          }
+        }
+      },
+      {
+        "name": "Delete a non-existent club",
+        "request": {
+          "method": "DELETE",
+          "header": [],
+          "url": {
+            "raw": "{{baseUrl}}/clubs/:clubId",
+            "host": ["{{baseUrl}}"],
+            "path": ["clubs", ":clubId"],
+            "variable": [
+              {
+                "key": "clubId",
+                "value": "0"
+              }
+            ]
+          }
+        }
+      }
+    ],
+    "variable": [
+      {
+        "key": "baseUrl",
+        "value": "http://localhost:3000"
+      }
+    ]
+  }
+  

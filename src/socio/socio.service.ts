@@ -24,7 +24,7 @@ export class SocioService {
     }
 
     async create(socio:SocioEntity): Promise<SocioEntity>{
-        if (socio.email.includes('@')){
+        if (!socio.email.includes('@')){
             throw new BusinessLogicException('Email must have a valid domain', BusinessError.PRECONDITION_FAILED);
         }
         return await this.socioRepository.save(socio);
@@ -35,7 +35,7 @@ export class SocioService {
         if (!persistedSocio){
             throw new BusinessLogicException('socio with the given id not found', BusinessError.NOT_FOUND);
         }
-        if (socio.email.includes('@')){
+        if (!socio.email.includes('@')){
             throw new BusinessLogicException('Email must have a valid domain', BusinessError.PRECONDITION_FAILED);
         }
         return await this.socioRepository.save({...persistedSocio, ...socio});

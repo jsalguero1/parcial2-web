@@ -18,7 +18,7 @@ export class ClubService {
     async findOne(id:string):Promise<ClubEntity>{
         const club: ClubEntity = await this.clubRepository.findOne({where:{id}, relations:['socios']})
         if(!club){
-            throw new BusinessLogicException('Club with the given id not found', BusinessError.NOT_FOUND)
+            throw new BusinessLogicException('club with the given id not found', BusinessError.NOT_FOUND)
         }
         return club
     }
@@ -33,7 +33,7 @@ export class ClubService {
     async update(id:string, club:ClubEntity): Promise<ClubEntity>{
         const persistedClub:ClubEntity = await this.clubRepository.findOne({where:{id}});
         if (!persistedClub){
-            throw new BusinessLogicException('Club with the given id not found', BusinessError.NOT_FOUND);
+            throw new BusinessLogicException('club with the given id not found', BusinessError.NOT_FOUND);
         }
         if (club.description.length > 100){
             throw new BusinessLogicException('Description too long', BusinessError.PRECONDITION_FAILED);

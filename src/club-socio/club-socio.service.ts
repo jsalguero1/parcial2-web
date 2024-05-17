@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { ClubEntity } from 'src/club/club.entity/club.entity';
-import { BusinessError, BusinessLogicException } from 'src/shared/errors/business-errors';
-import { SocioEntity } from 'src/socio/socio.entity/socio.entity';
+import { ClubEntity } from '../club/club.entity/club.entity';
+import { BusinessError, BusinessLogicException } from '../shared/errors/business-errors';
+import { SocioEntity } from '../socio/socio.entity/socio.entity';
 import { Repository } from 'typeorm';
 
 @Injectable()
